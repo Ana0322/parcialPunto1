@@ -1,0 +1,80 @@
+import java.util.Scanner;
+public class yamahita {
+    static class Producto {
+        String nombre;
+        double precio;
+        int cantidad;
+
+
+        public Producto(String nombre, double precio, int cantidad) {
+            this.nombre = nombre;
+            this.precio = precio;
+            this.cantidad = cantidad;
+        }
+    }
+    public static boolean 
+    contieneNumeros(String texto) {
+        return texto.matches(".*\\d.*");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new 
+Scanner(System.in);
+Producto[] Productos = new 
+Producto[45];
+int contador = 0;
+
+system.out.println("Sistema de recuperación Yamahita ");
+while (contador < 45) {try {
+    system.out.println("\nRegistro # " + (contador + 1));
+    system.out.print("Ingrese el nombre del producto: ");
+    String nombre = 
+    sc.nextLine().trim();
+
+    if (nombre.isEmpty()) {
+        throw new 
+IllegalArgumentException("El nombre no puede estar vacío.");
+    }
+    if (contieneNumeros(nombre)) {
+        throw new IllegalArgumentException("El nombre no puede contener números.");
+    }
+    system.out.print("Ingrese el precio del producto (Ejemplo 22,34): ");
+string precioTexto = sc.nextLine();
+double precio = Double.parseDouble(precioTexto);
+    if (precio <= 0) {
+        throw new IllegalArgumentException("El precio debe ser un número positivo.");
+    }
+
+    system.out.print("Ingrese la cantidad del producto: ");
+string cantidadTexto = sc.nextLine();
+int cantidad = Integer.parseInt(cantidadTexto);
+    if (cantidad < 0) {
+        throw new IllegalArgumentException("La cantidad no puede ser negativa.");
+    }
+
+    Productos[contador] = new Producto(nombre, precio, cantidad);
+    contador++;
+} catch (NumberFormatException e) {
+    system.out.println("Error: debe inresar numeros validos, use punto para decimales ");
+
+} catch (IllegalArgumentException e) {
+    system.out.println("Error inesperado: " + e.getMessage());
+
+
+}
+
+}
+
+Producto MayorPrecio = Productos[0];
+for (int i = 1; i < Productos.length; i++) {
+    if (Productos[i]!= null && Productos[i].precio > MayorPrecio.precio) {
+        MayorPrecio = Productos[i];
+    }
+}
+system.out.println("\nProducto con el mayor precio:");
+system.out.println("Nombre: " + MayorPrecio.nombre);
+system.out.println("Precio: " + MayorPrecio.precio);
+system.out.println("Cantidad: " + MayorPrecio.cantidad);
+sc.close();
+}
+}
